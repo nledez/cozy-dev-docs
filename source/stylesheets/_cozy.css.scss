@@ -1,0 +1,5 @@
+// Cozy theme customisations
+
+.lang-selector [data-language-name="javascript"]:after {
+    content: ' (ES6)';
+}
