@@ -2,10 +2,11 @@
 title: Cozy Developer Documentation
 
 language_tabs:
-  - javascript
-  - coffeescript
+  - javascript: JavaScript (ES6)
+  - coffeescript: CoffeeScript
 
 toc_footers:
+  - <a href="https://cozy.io">Cozy Website</a>
   - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 search: true
@@ -82,9 +83,6 @@ Cozy also became our **daily working environment**, and we want it to be as comf
 
 ## Developing with Cozy
 
-Definitely real testimonials from definitely real individuals:
-
-<p style="border-bottom: 1px solid #ccc;"></p>
 
 “ *Cozy has been a great opportunity for me to start coding. Now I run a decent business.* ”     
 <small>Bill Getas - Startup entrepreneur</small>
@@ -120,9 +118,123 @@ And whatever the reason, you will always find a friendly team member to help you
 
 # Getting Started
 
-Subject covered: a simple app to display some data stored in your Cozy + a konnector
+This section is a quick tutorial showing off the different steps to start using Cozy as a development environment, making a simple app, and interact with your data.
 
 ## Set up the Development Environment
+
+Since Cozy is made from several pieces, we wrapped it into an **easy-to-use Virtual Machine**, so you don't clutter your local system. That also means you can use the operation system you like! Well, there are obviously issues on Windows, so we will assume here that you use a **GNU/Linux system or Mac OS X**.
+
+The environment is made of two parts: the Virtual Machine itself - a fully installed Cozy platform - and a local Node.js tool called `cozy-dev` which will help you getting started and deploying your app to your Cozy.
+
+### 1. Install Git
+
+ > On GNU/Linux, just install Git with your package manager
+
+```shell
+apt-get install git
+```
+
+ > On Mac OS, download the software here: <br>
+ > <a href="http://git-scm.com/download/mac">http://git-scm.com/download/mac</a>
+
+```shell
+# To check if Git is installed
+git --version
+```
+
+The first step is obviously to install the development dependencies. Git is the [SCM](https://en.wikipedia.org/wiki/Version_control) we use at Cozy, and if you don't know how to use it yet, don't worry: we will give example commands in the following tutorial.
+
+
+### 2. Install Node.js 0.10.x
+
+ > On Debian GNU/Linux Jessie, the proper version of Node.js is available in the official repositories
+
+```shell
+apt-get install nodejs nodejs-legacy
+```
+
+ > On other GNU/Linux systems, you can install Node.js manually by doing
+
+```shell
+wget -q -O - http://nodejs.org/dist/v0.10.40/node-v0.10.40.tar.gz | tar xz
+cd node-v0.10.40
+./configure
+make
+make install
+cd .. && rm -r node-v0.10.40
+npm install -g npm
+```
+
+ > On Mac OS X, simply download the package, and install it <br>
+ > <a href="https://nodejs.org/dist/v0.10.40/node-v0.10.40.pkg">https://nodejs.org/dist/v0.10.40/node-v0.10.40.pkg</a>
+
+```shell
+# To check the Node.js version
+node --version
+```
+
+Installing Node.js on your local environment is necessary to run your app and use `cozy-dev`. Cozy runs well on <strong>Node.js v0.10.26 to v0.10.40</strong>, and you will have to install one of these versions.
+
+You can find detailed instructions of installation on the [official page](https://github.com/nodejs/node-v0.x-archive/wiki/Installing-Node.js-via-package-manager).
+
+<aside class="warning">
+If you already have a Node.js version installed on your computer that is not between <strong>v0.10.26</strong> and <strong>v0.10.40</strong>, you will have to consider <strong>upgrading/downgrading</strong> it, or to use a tool like <a href="https://github.com/tj/n">N</a>.
+</aside>
+
+
+### 3. Install VirtualBox and Vagrant
+
+**VirtualBox** is used to emulate a full Operating System in a Virtual Machine. You can download it from [https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads)
+
+**Vagrant** is a Command-Line Interface to interact with VirtualBox and handle development environment easily. You can download it from [https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
+
+<aside class="notice">
+On Debian GNU/Linux 8, <code>virtualbox</code> and <code>vagrant</code> are available in the official repositories.
+</aside>
+
+
+### 4. Install <code>cozy-dev</code>
+
+```shell
+# Use the -g option to install system-wide
+sudo npm install -g cozy-dev
+```
+
+As mentionned above, `cozy-dev` is a set of tools aiming to help you managing your app deployment and your development environment. It is recommended to install it system-wide.
+
+The full documentation of `cozy-dev` can be found below on the [related section](#cozy-development-environment).
+
+
+### 5. Download and start the environment
+
+```shell
+# Create a development directory
+mkdir cozy && cd cozy
+
+# Download the environment
+cozy-dev vm:init
+
+# Start the environment
+cozy-dev vm:start
+
+# Check that the environment is properly started
+cozy-dev vm:status
+
+# Update the environment (strongly recommended)
+cozy-dev vm:update
+```
+
+Use `cozy-dev` to initialize the environment.    
+It is recommended to **update it** at the end because we don't necessarily maintain the raw image in an up-to-date state, as a new version of Cozy can be released every couple of weeks ☺
+
+<aside class="notice">
+The command <code>cozy-dev vm:init</code> can take a few minutes to complete as it downloads the full environment. You only have to do it once though.
+</aside>
+
+<aside style="clear: both" class="success">
+You should now be able to go to <a href="http://localhost:9104">http://localhost:9104</a> ! ☺
+</aside>
+
 ## Hello, World!
 ## Interact with your Cozy's data
 ## Import data with a Konnector

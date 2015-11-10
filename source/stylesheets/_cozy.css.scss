@@ -1,5 +1,10 @@
 // Cozy theme customisations
 
-.lang-selector [data-language-name="javascript"]:after {
-    content: ' (ES6)';
+.content h3, .content h4, .content h5, .content h6 {
+  clear: both;
+}
+
+body .content pre, body .content blockquote {
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
